@@ -1,5 +1,8 @@
 package xo.game.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class XOGame implements XOGameConstant {
 	
 	XOBoard xoBoard;
@@ -17,20 +20,20 @@ public class XOGame implements XOGameConstant {
 	}
 
 	// Input by position
-	public String inputTo(String str, int row, int col) {
+	public String inputTo(String str, int col, int row) {
 		// Input
-		this.xoBoard.inputTo(str, row, col);
+		this.xoBoard.inputTo(str, col, row);
 		this.xoBoard.setLastOnBoard(str);
 			
 		return SUCCESS;
 	}
 	
 	// Check position not allowed
-	public String checkPostionNotEmpty(int row, int col) {
+	public String checkPostionNotEmpty(int col, int row) {
 		// Query board
 		String[][] board = this.xoBoard.getBoard();
 		
-		if(board[row][col] != null) {
+		if(board[col][row] != null) {
 			return ERR_POSITION_NOT_EMPTY;
 		}
 		
@@ -55,5 +58,30 @@ public class XOGame implements XOGameConstant {
 	}
 	
 	// Check winner
+	public boolean isWinner() {
+		// Query board
+		String[][] board = this.xoBoard.getBoard();
+		
+		// Check
+		List<String> temp = new ArrayList<String>();
+		
+		temp.add(board[0][0] + board[0][1] + board[0][2]);
+		temp.add(board[1][0] + board[1][1] + board[1][2]);
+		temp.add(board[2][0] + board[2][1] + board[2][2]);
+		
+		temp.add(board[0][0] + board[1][0] + board[2][0]);
+		temp.add(board[0][1] + board[1][1] + board[2][1]);
+		temp.add(board[0][2] + board[1][2] + board[2][2]);
+
+		temp.add(board[0][0] + board[1][1] + board[2][2]);
+		temp.add(board[0][2] + board[1][1] + board[2][0]);
+		
+		for (String winCase : temp) {
+			if("XXX".equals(winCase) || "OOO".equals(winCase)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
