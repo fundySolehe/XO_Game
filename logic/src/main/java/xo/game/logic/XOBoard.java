@@ -24,7 +24,7 @@ public class XOBoard {
 		this.board = board;
 	}
 	
-	public void inputTo(String str, int row, int col) {
-		board[row][col] = str;
+	public void inputTo(String str, int col, int row) {
+		board[col][row] = str;
 	}
 }

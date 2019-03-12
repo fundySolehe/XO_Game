@@ -84,4 +84,19 @@ public class XOGame implements XOGameConstant {
 		return false;
 	}
 	
+	// Display game
+	public void displayGame() {
+		String[][] board = this.xoBoard.getBoard();
+		
+		System.out.println("--------------");
+		for(int i=0; i<3; i++) {
+			String a = board[0][i] != null ? board[0][i] : " ";
+			String b = board[1][i] != null ? board[1][i] : " ";
+			String c = board[2][i] != null ? board[2][i] : " ";
+			
+			System.out.println("| " + a + " | " + b + " | " + c + " |");
+			System.out.println("--------------");
+		}
+	}
+	
 }
